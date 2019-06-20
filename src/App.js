@@ -1,26 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import InputCSV from './Components/InputCSV';
+import InputLineParser from './Components/InputLineParser';
+import GeoCoder from './Components/GeoCoder';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      addressLines: [],
+      addresses: []
+    };
+
+    this.addAddressLines = this.addAddressLines.bind(this);
+    this.setAddresses = this.setAddresses.bind(this);
+  }
+
+  addAddressLines(addressLines) {
+    console.log("Added", addressLines.length, "addresses.");
+    this.setState({ addressLines });
+  }
+
+  setAddresses(addresses) {
+    this.setState({ addresses });
+  }
+
+  render() {
+    return (
+      <div className="container-fluid mt-5">
+        <div className="row">
+          <div className="col-md-12">
+            <h1>CSV Geocoder</h1>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12">
+            <InputCSV
+              add={this.addAddressLines}
+            ></InputCSV>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+            <InputLineParser
+              addressLines={this.state.addressLines}
+              />
+          </div>
+          <div className="col-md-6">
+            <GeoCoder
+              rows={this.state.addresses}
+              />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
