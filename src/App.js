@@ -11,11 +11,13 @@ class App extends Component {
 
     this.state = {
       addressLines: [],
+      delimiter: ',',
       addresses: []
     };
 
     this.addAddressLines = this.addAddressLines.bind(this);
     this.setAddresses = this.setAddresses.bind(this);
+    this.setDelimiter = this.setDelimiter.bind(this);
   }
 
   addAddressLines(addressLines) {
@@ -26,6 +28,8 @@ class App extends Component {
   setAddresses(addresses) {
     this.setState({ addresses });
   }
+
+  setDelimiter(delimiter) { this.setState({ delimiter }); }
 
   render() {
     return (
@@ -46,6 +50,9 @@ class App extends Component {
           <div className="col-md-6">
             <InputLineParser
               addressLines={this.state.addressLines}
+              setAddresses={this.setAddresses}
+              setDelimiter={this.setDelimiter}
+              delimiter={this.state.delimiter}
               />
           </div>
           <div className="col-md-6">
