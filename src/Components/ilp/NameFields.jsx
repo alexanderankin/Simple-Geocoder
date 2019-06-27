@@ -44,6 +44,7 @@ class NameFields extends Component {
                   <input
                     type="checkbox"
                     checked={false}
+                    onChange={() => {}}
                     />
                 </td>
                 <td>{field}</td>
